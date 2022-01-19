@@ -1,0 +1,37 @@
+<div class="container">
+  <div class="select-block">
+    <div *ngFor="let menu of navs; let i = index">
+      <div *ngIf="menu.items.length">
+    <span (click)="toggleSubMenu(i)" class="icon" [class.active]="selectedIndex === i">
+    <span>{{ menu.name }}</span>
+    </span>
+        <div *ngIf="isVisible[i]">
+          <div *ngFor="let subMenu of menu.items">
+            <span (click)="showUsersById(subMenu.id)">{{subMenu.name}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="table-block">
+      <table id="users">
+        <tr class="table-header">
+          <th>E-mail</th>
+          <th>Age</th>
+        </tr>
+        <tr *ngFor="let user of users">
+          <td>{{user.email}}</td>
+          <td>{{user.birth_date | convertBirthdayToAge}}</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="user-info-block">
+      <p>Youngest user: {{youngestUser[0] | convertEmailToName}}</p>
+      <p>Oldest user: {{oldestUser[0] | convertEmailToName }}</p>
+      <p>Average age: {{averageAge | convertBirthdayToAge }}</p>
+    </div>
+  </div>
+</div>
